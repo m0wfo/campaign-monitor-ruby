@@ -32,10 +32,8 @@ class CampaignMonitor
     end
 
     def is_subscribed?(list_id)
-      result = @cm_client.Subscribers_GetIsSubscribed("ListID" => list_id, "Email" => @email_address)
-      return true if result == 'True'
-      return false if result == 'False'
-      raise "Invalid value for is_subscribed?: #{result}"
+      result = @cm_client.Subscribers_GetIsSubscribed("ListID" => list, "Email" => @email_address)["__content__"]
+      result == "True"
     end
   end
 end
